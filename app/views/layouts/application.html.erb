@@ -11,6 +11,23 @@
   </head>
 
   <body>
+    <nav class="navbar bg-body-tertiary bg-dark" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="<%= root_path %>">
+          <img src="<%= asset_path('popcorn.svg') %>" alt="Popcorn Icon" width="30" height="24" class="d-inline-block align-text-top">
+          Movie Listr
+        </a>
+        <ul class="navbar-nav d-flex flex-row ms-auto">
+          <li class="nav-item mx-3">
+            <a class="nav-link" href="<%= root_path %>">My Lists</a>
+          </li>
+          <li class="nav-item mx-3">
+            <a class="nav-link" href="<%= new_list_path %>">New Lists</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
