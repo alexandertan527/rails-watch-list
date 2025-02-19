@@ -1,29 +1,34 @@
-<div class="position-relative text-align-center text-light">
-  <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-100 h-md-100 h-lg-100" id="theatre">
-  <div class="position-absolute top-50 start-50 translate-middle text-center w-100">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+  <div class="container d-flex justify-content-center">
     <h1>Your Movies, Your Lists, Your Way</h1>
   </div>
 </div>
 
-<div class="container">
+<div class="container my-5">
 
-  <h2 class="mx-3">My Lists</h2>
+  <div class="headings d-flex flex-row justify-content-between">
+    <h2 class="mx-3">My Lists</h2>
+    <%= link_to "Add a new list", new_list_path, class: "btn btn-gradient mx-3" %>
+  </div>
+
 
     <div class="d-flex flex-row">
 
       <% @lists.sort_by(&:name).each do |list| %>
         <%= link_to list_path(list) do %>
           <div class="card position-relative text-align-center m-3" style="width: 18rem;">
-            <img src="<%= asset_path('movie-card.jpg') %>" class="card-img-top" alt="Movie Reel">
+            <img src="<% if list.photo.attached? %>
+                <%= cl_image_path list.photo.key %>
+              <% else %>
+                <%= asset_path('movie-card.jpg') %>
+              <% end %>" class="card-img-top" alt="Movie Reel">
             <div class="position-absolute top-50 start-50 translate-middle text-center">
-              <%= link_to list.name, list_path(list), class: "text-white fs-1 text-decoration-none" %>
+              <h1><%= link_to list.name, list_path(list), class: "card-text text-white text-decoration-none fs-4 fs-md-3 fs-lg-1 fs-xl-custom fs-xxl-custom" %></h1>
             </div>
           </div>
         <% end %>
       <% end %>
 
     </div>
-
-  <%= link_to "Add a new list", new_list_path, class: "mx-3" %>
 
 </div>

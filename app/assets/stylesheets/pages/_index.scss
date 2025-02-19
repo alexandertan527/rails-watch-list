@@ -1,27 +1,43 @@
 // Import page-specific CSS files here.
 @import "home";
 
-#theatre {
-  clip-path: inset(600px 0 200px 0);
-  margin-top: -600px;
-  margin-bottom: -150px;
-  object-fit: cover; /* Ensures the image scales properly */
+.banner {
+  background-size: cover;
+  background-position: center;
+  padding: 150px 0;
+  height: 30vh;
 }
 
-@media (min-width: 600px) {
-  #theatre {
-    height: 100%; /* Fixed height only on medium screens and up */
+.banner h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.btn-gradient {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: linear-gradient(#167FFB, #0F60C4);
+  transition: background 0.3s ease;
+  border: 1px solid #0F60C4;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(#147EFF, #0F67DA);
+  color: white;
+}
+
+@media (min-width: 1200px) { /* XL screens */
+  .fs-xl-custom {
+    font-size: 3rem !important; /* Adjust as needed */
+  }
+}
+@media (min-width: 1400px) { /* XXL screens */
+  .fs-xxl-custom {
+    font-size: 4rem !important;
   }
 }
 
-@media (min-width: 768px) {
-  #theatre {
-    height: 50%; /* Fixed height only on medium screens and up */
-  }
-}
-
-@media (min-width: 992px) {
-  #theatre {
-    height: 50%; /* Larger height on bigger screens */
-  }
-}
