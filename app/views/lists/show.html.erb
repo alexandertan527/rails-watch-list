@@ -1,14 +1,39 @@
-<h1><%= @list.name %></h1>
+<div class="container p-5">
+  <div class="headers d-flex flex-row justify-content-between">
+    <div class="header d-flex align-items-end ms-3 mb-3">
+      <h1 class="mb-0 me-2"><%= @list.name %></h1><%= link_to list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this list?"} do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    </div>
 
-<% @bookmarks.each do |bookmark| %>
-  <p><%= "#{bookmark.movie.title} - #{bookmark.comment}" %></p>
-  <%= link_to "Remove movie from list", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this movie?"} %>
-<% end %>
+    <div class="buttons d-flex flex-row align-items-center fs-3">
+      <%= link_to new_list_bookmark_path(@list), class: "mx-3 text-decoration-none" do %>
+        <i class="fa-solid fa-plus"></i>
+      <% end %>
+      <%= link_to root_path, class: "mx-3" do %>
+        <i class="fa-solid fa-arrow-left"></i>
+      <% end %>
+    </div>
 
-<br>
-<%= link_to "Add a movie to this list", new_list_bookmark_path(@list) %>
-<br>
-<%= link_to "Back to Lists", root_path %>
-<br>
-<%= link_to "Delete list", list_path(@list),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this list?"} %>
+  </div>
+
+  <div class="d-flex flex-row">
+    <% @bookmarks.each do |bookmark| %>
+
+      <div class="card mx-3" style="width: 18rem;">
+        <img src="<%= bookmark.movie.poster_url %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= bookmark.movie.title %></h5>
+          <p class="card-text">- <%= bookmark.comment %></p>
+          <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this movie?"} do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+</div>
