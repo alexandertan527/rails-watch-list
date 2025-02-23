@@ -12,7 +12,7 @@
   </div>
 
 
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 mt-5">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-5 g-3">
     <% @lists.sort_by(&:name).each do |list| %>
       <div class="col">
         <%= link_to list_path(list), class: "text-decoration-none d-block h-100" do %>

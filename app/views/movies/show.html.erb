@@ -1,0 +1,12 @@
+<div class="container my-5 d-flex flex-column align-items-center w-50">
+
+  <div class="headings">
+    <h1 class="mx-3"><%= @movie.title %></h1>
+  </div>
+  <div>
+    <img src="<%= @movie.poster_url %>" class="figure-img img-fluid rounded-3 m-5" style="height: 500px; width: 300px;">
+  </div>
+  <div>
+    <p><%= @movie.overview %></p>
+  </div>
+</div>
