@@ -8,8 +8,30 @@
 
   <div class="headings d-flex flex-row justify-content-between">
     <h2 class="mx-3">My Lists</h2>
-    <%= link_to "Add a new list", new_list_path, class: "btn btn-gradient mx-3" %>
+    <button type="button" class="btn btn-primary btn-gradient mx-3" data-bs-toggle="modal" data-bs-target="#listModal">Add a new list</button>
   </div>
+
+<!-- Form Model -->
+<div class="modal fade" id="listModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="listModalLabel">New List</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(List.new) do |f| %>
+          <%= f.input :name %>
+          <%= f.input :photo, as: :file %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= f.submit "Save List", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
 
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-5 g-3">
