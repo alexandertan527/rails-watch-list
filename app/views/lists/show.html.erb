@@ -12,14 +12,37 @@
     </div>
 
     <div class="buttons d-flex flex-row align-items-center fs-4">
-      <%= link_to new_list_bookmark_path(@list), class: "mx-3 text-decoration-none", title: "Add a movie" do %>
+      <button type="button" class="mx-3 text-decoration-none text-primary border-0 bg-transparent"
+        data-bs-toggle="modal" data-bs-target="#bookmarkModal" title="Add a movie" data-turbo="false">
         <i class="fa-solid fa-plus"></i>
-      <% end %>
+      </button>
       <%= link_to list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this list?"}, class: "mx-3", title: "Delete list" do %>
         <i class="fa-solid fa-trash"></i>
       <% end %>
     </div>
 
+  </div>
+
+  <!-- Form Modal -->
+  <div class="modal fade" id="bookmarkModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="bookmarkModalLabel">Add Movie</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <%= simple_form_for([@list, Bookmark.new], data: { turbo: false }) do |f| %>
+          <div class="modal-body">
+              <%= f.association :movie %>
+              <%= f.input :comment %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <%= f.submit "Save Movie", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="d-flex flex-row">

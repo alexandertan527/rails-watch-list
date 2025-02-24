@@ -19,15 +19,15 @@
         <h1 class="modal-title fs-5" id="listModalLabel">New List</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <div class="modal-body">
-        <%= simple_form_for(List.new) do |f| %>
-          <%= f.input :name %>
-          <%= f.input :photo, as: :file %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <%= f.submit "Save List", class: "btn btn-primary" %>
-          </div>
+      <%= simple_form_for(List.new) do |f| %>
+        <div class="modal-body">
+            <%= f.input :name %>
+            <%= f.input :photo, as: :file %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <%= f.submit "Save List", class: "btn btn-primary" %>
+            </div>
         <% end %>
     </div>
   </div>
