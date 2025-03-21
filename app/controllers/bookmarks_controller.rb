@@ -10,9 +10,11 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.list = @list
     if @bookmark.save
-      redirect_to list_path(@list), notice: "Bookmark added!"
+      redirect_to list_path(@list), notice: "Bookmark added!", status: :see_other
     else
-      render :new, status: :unprocessable_entity
+      flash.now[:alert] = @bookmark.errors.full_messages.to_sentence
+      @bookmarks = @list.bookmarks
+      render "lists/show", status: :unprocessable_entity
     end
   end
 
