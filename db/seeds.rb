@@ -32,7 +32,7 @@ movies = []
 
   request = Net::HTTP::Get.new(url)
   request["accept"] = 'application/json'
-  request["Authorization"] = 'Bearer API_READ_ACCESS_TOKEN_HERE '
+  request["Authorization"] = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZmEyYTU5YTk1M2U3NjQ2ZTg1M2NkNWExNjlmZGNhNiIsIm5iZiI6MTc0Mjc1NjM0My4zMDU5OTk4LCJzdWIiOiI2N2UwNTlmN2MwYjQzODdhNmVjNzI5OGIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.LPwPCPtKCQhpB0T-9m_Pp8BxY9Q0z21LBgGLGoDZ7xc'
 
   response = http.request(request)
   data = JSON.parse(response.read_body)
