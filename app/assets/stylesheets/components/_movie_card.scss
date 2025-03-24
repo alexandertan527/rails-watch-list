@@ -1,4 +1,15 @@
-@media (max-width: 576px) {
+@media (max-width: 390px) {
+  .movie-card {
+    height: 16rem !important;
+    width: 9rem !important;
+  }
+
+  .hide {
+    display: none;
+  }
+}
+
+@media (min-width: 576px) {
   .movie-card {
     height: 18rem !important;
     width: 10rem !important;
