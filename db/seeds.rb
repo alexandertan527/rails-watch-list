@@ -13,9 +13,18 @@ require 'uri'
 require 'net/http'
 require 'json'
 
+puts "Deleting movies and bookmarks..."
+
+Movie.destroy_all
+Bookmark.destroy_all
+
+puts "Deleted all movies and bookmarks"
+
+puts "Putting movies into array..."
+
 movies = []
 
-(1..13).each do |page|
+(1..14).each do |page|
   url = URI("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=#{page}")
 
   http = Net::HTTP.new(url.host, url.port)
@@ -23,17 +32,28 @@ movies = []
 
   request = Net::HTTP::Get.new(url)
   request["accept"] = 'application/json'
-  request["Authorization"] = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZmEyYTU5YTk1M2U3NjQ2ZTg1M2NkNWExNjlmZGNhNiIsIm5iZiI6MTc0Mjc1NjM0My4zMDU5OTk4LCJzdWIiOiI2N2UwNTlmN2MwYjQzODdhNmVjNzI5OGIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.LPwPCPtKCQhpB0T-9m_Pp8BxY9Q0z21LBgGLGoDZ7xc'
+  request["Authorization"] = 'Bearer API_READ_ACCESS_TOKEN_HERE '
 
   response = http.request(request)
   data = JSON.parse(response.read_body)
   movies.concat(data["results"])
 end
 
-movies = movies.first(250)
+movies = movies.uniq { |movie| movie["title"] }.first(250)
+
+puts "Movies array populated with top 250 movies"
+
+puts "Creating movies in database..."
+
+base_url = "https://image.tmdb.org/t/p/w500"
 
 movies.each do |movie|
-  base_url = 'https://image.tmdb.org/t/p/w300'
-  new_movie = Movie.new()
-  new_movie.save!
+  Movie.create!(
+    title: movie["title"],
+    overview: movie["overview"],
+    poster_url: base_url + movie["poster_path"],
+    rating: movie["vote_average"]
+  )
 end
+
+puts "Movies created"
